@@ -6,5 +6,6 @@ class User < ApplicationRecord
                         format: { with: VALID_EMAIL_REGEX },
                         uniqueness: { case_sensitive: false }
     has_secure_password
+    # パスワードの存在性の証明と長さの規約を作成
     validates :password, presence: true, length: { minimum: 6 }
 end
