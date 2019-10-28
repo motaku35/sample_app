@@ -18,5 +18,8 @@ class UsersProfileTest < ActionDispatch::IntegrationTest
     @user.microposts.paginate(page: 1).each do |micropost|
       assert_match micropost.content, response.body#micropostの内text文がhtml内にあるかテスト
     end
+    assert_match @user.microposts.count.to_s, @response.body
+    assert_match @user.active_relationships.count.to_s, response.body
+    assert_match @user.passive_relationships.count.to_s, response.body
   end
 end

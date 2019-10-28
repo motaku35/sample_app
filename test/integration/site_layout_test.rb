@@ -31,4 +31,11 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", edit_user_path(@user)    
     assert_select "a[href=?]", logout_path
   end
+
+  test "count relationships" do
+    log_in_as(@user)
+    get root_path
+    assert_match @user.active_relationships.count.to_s, response.body
+    assert_match @user.passive_relationships.count.to_s, response.body
+  end
 end
